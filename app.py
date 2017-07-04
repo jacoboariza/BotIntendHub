@@ -1,6 +1,7 @@
 
 
 
+
 #!/usr/bin/env python
 
 from __future__ import print_function
@@ -19,6 +20,8 @@ from flask import request
 from flask import make_response
 
 import yahooWeatherForecast
+
+makeYqlQuery = yahooWeatherForecast.makeYqlQuery
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -54,7 +57,7 @@ def processRequest(req):
     return res
 
 
-
+"""
 def makeYqlQuery(req):
 
 
@@ -80,7 +83,7 @@ def makeYqlQuery(req):
 
 
     return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "') and u='c'"
-
+"""
 def makeWebhookResult(data):
     query = data.get('query')
     if query is None:
