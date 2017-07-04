@@ -38,17 +38,7 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 #--------------------------------
-def func1:
- print "Func1"
 
-def func2:
- print "Func2"
-
-def funcN:
- print "FuncN"
-
-def defaultFunc:
- print "Default func"
 
 #--------------------------------
 def processRequest(req):
@@ -57,12 +47,7 @@ def processRequest(req):
 
  
  
-    try: ({'yahooWeatherForecast': func1, '2': func2, 'N', funcN}action)()
-except KeyError:
-defaultFunc()
-    
-    
-    
+
     if req.get("result").get("action") != "yahooWeatherForecast":
         return {}
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
