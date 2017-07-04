@@ -42,7 +42,7 @@ def webhook():
 
 #--------------------------------
 def processRequest(req):
-    action = req.get("result").get("action")
+    #action = req.get("result").get("action")
     
 
  
