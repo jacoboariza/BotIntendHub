@@ -1,20 +1,44 @@
 #!/usr/bin/env python
+
+
+
 from __future__ import print_function
+
 from future.standard_library import install_aliases
+
 install_aliases()
+
+
+
 from urllib.parse import urlparse, urlencode
+
 from urllib.request import urlopen, Request
+
 from urllib.error import HTTPError
+
+
+
 import json
+
 import os
+
+
+
 from flask import Flask
+
 from flask import request
+
 from flask import make_response
-import yahooWeatherForecast
-makeYqlQuery = yahooWeatherForecast.makeYqlQuery
+
+
 
 # Flask app should start in global layout
+
 app = Flask(__name__)
+
+
+
+
 
 @app.route('/webhook', methods=['POST'])
 
@@ -76,59 +100,25 @@ def processRequest(req):
 
 
 
-"""
-
 def makeYqlQuery(req):
-
-
-
-
-
-
 
     result = req.get("result")
 
-
-
-
-
-
-
     parameters = result.get("parameters")
-
-
-
-
-
-
 
     city = parameters.get("geo-city")
 
-
-
-
-
-
-
     if city is None:
-
-
-
-
-
-
 
         return None
 
 
 
+    return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
 
 
 
 
-    return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "') and u='c'"
-
-"""
 
 def makeWebhookResult(data):
 
@@ -180,9 +170,9 @@ def makeWebhookResult(data):
 
 
 
-    speech = "Hoy en " + location.get('city') + ": " + condition.get('text') + \
+    speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
 
-             ", la temperatura es de " + condition.get('temp') + " " + units.get('temperature')
+             ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
 
 
 
